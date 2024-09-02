@@ -1,0 +1,15 @@
+{
+  "name": "web-components",
+  "version": "1.0.0",
+  "description": "TailwindCSS for preview presentation",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.build.css -w",
+    "build": "tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind.build.css"
+  },
+  "author": "Jared Cornwall",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}
