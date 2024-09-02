@@ -21,13 +21,14 @@ class ScrollAssist extends HTMLElement {
   }
 
   calcDistance() {
-    return this.distance == 'child' ? this.track.firstElementChild.offsetWidth : this.track.offsetWidth;
+    return this.distance == 'child'
+      ? this.track.firstElementChild.nextElementSibling.offsetLeft
+      : this.track.offsetWidth;
   }
 
   handleScroll(event) {
     const eventTarget = event.currentTarget.dataset.scrollDirection;
     const distance = this.calcDistance();
-    console.log(distance, this.track.offsetWidth, this.track.firstElementChild.offsetWidth);
     const leftOrRight = eventTarget === 'right' ? distance : -distance;
     this.track.scrollBy({ left: leftOrRight, behavior: 'smooth' });
   }
