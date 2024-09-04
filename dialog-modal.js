@@ -26,7 +26,7 @@ class DialogModal extends HTMLElement {
   }
 
   connectedCallback() {
-    this.dialog.addEventListener('click', this.handleClick.bind(this));
+    this.dialog.addEventListener('click', this.handleClose.bind(this));
   }
 
   show() {
@@ -34,15 +34,24 @@ class DialogModal extends HTMLElement {
     this.loadContent();
   }
 
-  handleClick(event) {
+  // Close when clicked outside the dialog.
+  // <form method="dialog"> used for close button.
+  handleClose(event) {
     const x = event.clientX;
     const y = event.clientY;
-    const rect = event.target.getBoundingClientRect();
-    if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+    const dialog = this.dialog.getBoundingClientRect();
+
+    // X and Y are 0 if keyboard navigation is used,
+    // which can result in unwanted closing of modal.
+    // The close button will still work with <form>.
+    if (x === 0 && y === 0) return;
+
+    if (x < dialog.left || x > dialog.right || y < dialog.top || y > dialog.bottom) {
       this.dialog.close();
     }
   }
 
+  // Load content from URL if data-load attribute is set and not yet loaded
   loadContent() {
     if (this.content && this.load && !this.loaded) {
       this.content.classList.add(this.loadingClass);
