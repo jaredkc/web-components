@@ -10,6 +10,7 @@
   "author": "Jared Cornwall",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "tailwindcss": "^3.4.10"
   }
 }
