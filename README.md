@@ -1,4 +1,4 @@
-Web Components
---------------
+Web Components by Jared Cornwall
+-------------------------------
 
-Web Components with no dependencies. TailwindCSS is used for presentation only; it is not required.
+Simple, lightweight, and performant web components I have built and used on a variety of projects.
