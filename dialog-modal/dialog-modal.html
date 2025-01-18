@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal Dialog</title>
+    <link rel="stylesheet" href="../assets/tailwind.build.css" />
+    <link rel="stylesheet" href="../assets/presentation.css" />
+    <link rel="stylesheet" href="dialog-modal.css" />
+    <script src="dialog-modal.js" defer="defer"></script>
+  </head>
+  <body class="body-center">
+    <dialog-opener data-dialog="#dialog-basic">
+      <button>Open Basic</button>
+    </dialog-opener>
+    <dialog-opener data-dialog="#dialog-advanced">
+      <button>Open Basic and Load Content</button>
+    </dialog-opener>
+
+    <dialog-modal id="dialog-basic">
+      <dialog>
+        <form method="dialog">
+          <button class="dialog-close" autofocus>Close</button>
+        </form>
+        <div class="dialog-content">
+          <h2>Basic Modal</h2>
+          <p style="margin: 16rem 0">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae rerum assumenda sit exercitationem, molestias
+            perspiciatis, unde est natus facere consectetur reiciendis sunt quisquam a saepe accusamus praesentium,
+            adipisci maiores dolorem.
+          </p>
+          <p style="margin: 16rem 0">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae rerum assumenda sit exercitationem, molestias
+            perspiciatis, unde est natus facere consectetur reiciendis sunt quisquam a saepe accusamus praesentium,
+            adipisci maiores dolorem.
+          </p>
+          <p style="margin: 16rem 0">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae rerum assumenda sit exercitationem, molestias
+            perspiciatis, unde est natus facere consectetur reiciendis sunt quisquam a saepe accusamus praesentium,
+            adipisci maiores dolorem.
+          </p>
+          <p style="margin: 16rem 0">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae rerum assumenda sit exercitationem, molestias
+            perspiciatis, unde est natus facere consectetur reiciendis sunt quisquam a saepe accusamus praesentium,
+            adipisci maiores dolorem.
+          </p>
+        </div>
+      </dialog>
+    </dialog-modal>
+
+    <dialog-modal id="dialog-advanced" data-load="https://jsonplaceholder.typicode.com/todos/1">
+      <dialog>
+        <form method="dialog">
+          <button class="dialog-close" autofocus>Close</button>
+        </form>
+        <div class="dialog-content">
+          <h2>Advanced Modal</h2>
+          <p class="my-4">...</p>
+          <form action="" method="get" class="form-example">
+            <div class="form-example">
+              <label for="name">Enter your name: </label>
+              <input type="text" name="name" id="name" required />
+            </div>
+            <div class="form-example">
+              <label for="email">Enter your email: </label>
+              <input type="email" name="email" id="email" required />
+            </div>
+            <div class="form-example">
+              <input type="submit" value="Subscribe!" />
+            </div>
+          </form>
+        </div>
+      </dialog>
+    </dialog-modal>
+  </body>
+</html>

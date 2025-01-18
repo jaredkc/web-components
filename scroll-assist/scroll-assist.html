@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Assist</title>
+    <link rel="stylesheet" href="../assets/tailwind.build.css" />
+    <link rel="stylesheet" href="../assets/presentation.css" />
+    <script src="scroll-assist.js" defer="defer"></script>
+    <style>
+      button:disabled {
+        opacity: 0.1;
+      }
+    </style>
+  </head>
+  <body class="p-4">
+    <scroll-assist>
+      <div
+        class="flex w-full max-w-2xl gap-8 mx-auto my-12 overflow-x-auto border snap-mandatory snap-x py-14 aspect-square overscroll-contain"
+        data-scroll-track
+      >
+        <div class="w-full max-w-xl rounded-md snap-start shrink-0 bg-slate-200">1</div>
+        <div class="w-full max-w-xl rounded-md snap-start shrink-0 bg-slate-100">2</div>
+        <div class="w-full max-w-xl rounded-md snap-start shrink-0 bg-slate-200">3</div>
+        <div class="w-full max-w-xl rounded-md snap-start shrink-0 bg-slate-100">4</div>
+        <div class="w-full max-w-xl rounded-md snap-start shrink-0 bg-slate-200">5</div>
+      </div>
+      <button data-scroll-direction="left">&larr;</button>
+      <button data-scroll-direction="right">&rarr;</button>
+    </scroll-assist>
+
+    <hr class="my-12">
+
+    <div class="max-w-xl mx-auto">
+      <scroll-assist data-scroll-distance="child">
+        <div class="flex w-full gap-8 overflow-x-auto snap-x py-14" data-scroll-track>
+          <div class="snap-start shrink-0 last:pr-[calc(100%-21.5rem)]">
+            <img class="h-40 bg-white rounded-lg shadow-xl shrink-0 w-80" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+          </div>
+          <div class="snap-start shrink-0 last:pr-[calc(100%-21.5rem)]">
+            <img class="h-40 bg-white rounded-lg shadow-xl shrink-0 w-80" src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+          </div>
+          <div class="snap-start shrink-0 last:pr-[calc(100%-21.5rem)]">
+            <img class="h-40 bg-white rounded-lg shadow-xl shrink-0 w-80" src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+          </div>
+          <div class="snap-start shrink-0 last:pr-[calc(100%-21.5rem)]">
+            <img class="h-40 bg-white rounded-lg shadow-xl shrink-0 w-80" src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+          </div>
+          <div class="snap-start shrink-0 last:pr-[calc(100%-21.5rem)]">
+            <img class="h-40 bg-white rounded-lg shadow-xl shrink-0 w-80" src="https://images.unsplash.com/photo-1575424909138-46b05e5919ec?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=320&amp;h=160&amp;q=80">
+          </div>
+        </div>
+        <button data-scroll-direction="left">&larr;</button>
+        <button data-scroll-direction="right">&rarr;</button>
+      </scroll-assist>
+    </div>
+
+  </body>
+</html>
