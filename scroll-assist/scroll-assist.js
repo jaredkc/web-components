@@ -28,9 +28,13 @@ if (!customElements.get('scroll-assist')) {
     }
 
     calcDistance() {
-      return this.distance == 'child'
+      if (this.distance !== 'child') return this.track.offsetWidth;
+
+      // This accounts for scroll padding, like used with .scroll-x styles
+      const firstChildLeft = this.track.firstElementChild.offsetLeft;
+      return firstChildLeft === 0
         ? this.track.firstElementChild.nextElementSibling.offsetLeft
-        : this.track.offsetWidth;
+        : this.track.firstElementChild.offsetLeft;
     }
 
     handleScroll(event) {
