@@ -30,7 +30,7 @@ if (!customElements.get('scroll-assist')) {
     calcDistance() {
       if (this.distance !== 'child') return this.track.offsetWidth;
 
-      // This accounts for scroll padding, like used with .scroll-x styles
+      // This accounts for scroll padding
       const firstChildLeft = this.track.firstElementChild.offsetLeft;
       return firstChildLeft === 0
         ? this.track.firstElementChild.nextElementSibling.offsetLeft

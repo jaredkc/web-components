@@ -3,26 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modal Dialog</title>
+    <title>Modal Dialog Web Component</title>
     <link rel="stylesheet" href="../assets/tailwind.build.css" />
-    <link rel="stylesheet" href="../assets/presentation.css" />
     <link rel="stylesheet" href="dialog-modal.css" />
     <script src="dialog-modal.js" defer="defer"></script>
   </head>
   <body class="body-center">
-    <dialog-opener data-dialog="#dialog-basic">
-      <button>Open Basic</button>
-    </dialog-opener>
-    <dialog-opener data-dialog="#dialog-advanced">
-      <button>Open Basic and Load Content</button>
-    </dialog-opener>
+    <div class="max-w-sm mx-4 my-12">
+      <h1 class="text-3xl">Dialog Modal</h1>
+      <p class="mt-1 text-xl">
+        Simple <code>&lt;dialog-opener&gt;</code> and <code>&lt;dialog-modal&gt;</code> components on top of native
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog">dialog</a> element.
+      </p>
+
+      <ul class="mt-12 space-y-8">
+        <li>
+          <dialog-opener data-dialog="#dialog-contact">
+            <button class="btn">Open Contact Form Modal</button>
+          </dialog-opener>
+        </li>
+        <li>
+          <dialog-opener data-dialog="#dialog-basic">
+            <button class="btn">Open Long Content Modal</button>
+          </dialog-opener>
+        </li>
+        <li>
+          <dialog-opener data-dialog="#dialog-advanced">
+            <button class="btn">Open and Load External Content</button>
+          </dialog-opener>
+        </li>
+      </ul>
+    </div>
+
+    <dialog-modal id="dialog-contact">
+      <dialog>
+        <div class="dialog-content">
+          <h2 class="text-xl">Contact Form</h2>
+          <p class="mb-6">Please fill out the form below to contact us.</p>
+          <form action="" method="get" class="space-y-4">
+            <label for="name" class="block">
+              Enter your name:
+              <input
+                class="w-full px-4 py-2 text-sm border rounded-md border-slate-300"
+                type="text"
+                name="name"
+                id="name"
+                required
+                autofocus
+              />
+            </label>
+            <label for="email" class="block">
+              Enter your email:
+              <input class="w-full px-4 py-2 text-sm border border-gray-300 rounded-md" type="email" name="email" id="email" required />
+            </label>
+            <input type="submit" value="Subscribe!" class="btn" />
+          </form>
+        </div>
+        <form method="dialog">
+          <button class="dialog-close">Close</button>
+        </form>
+      </dialog>
+    </dialog-modal>
 
     <dialog-modal id="dialog-basic">
       <dialog>
         <form method="dialog">
           <button class="dialog-close" autofocus>Close</button>
         </form>
-        <div class="dialog-content">
+        <div class="prose dialog-content">
           <h2>Basic Modal</h2>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae rerum assumenda sit exercitationem, molestias
@@ -52,23 +100,7 @@
         <form method="dialog">
           <button class="dialog-close" autofocus>Close</button>
         </form>
-        <div class="dialog-content">
-          <h2>Advanced Modal</h2>
-          <p class="my-4">...</p>
-          <form action="" method="get" class="form-example">
-            <div class="form-example">
-              <label for="name">Enter your name: </label>
-              <input type="text" name="name" id="name" required />
-            </div>
-            <div class="form-example">
-              <label for="email">Enter your email: </label>
-              <input type="email" name="email" id="email" required />
-            </div>
-            <div class="form-example">
-              <input type="submit" value="Subscribe!" />
-            </div>
-          </form>
-        </div>
+        <div class="dialog-content">Loading...</div>
       </dialog>
     </dialog-modal>
   </body>

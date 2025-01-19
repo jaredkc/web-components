@@ -3,6 +3,8 @@
  */
 
 dialog {
+  border-radius: 0.5rem;
+  color: inherit;
   max-height: 90dvh;
   max-width: 90dvw;
   padding: 0;
@@ -13,11 +15,12 @@ dialog {
   max-height: 90dvh;
   max-width: 95dvw;
   overflow: auto;
-  padding: 3rem 1rem;
+  padding: 1rem;
 }
 
 .dialog-close {
   background: rgba(255, 255, 255, 0.75);
+  border-radius: 0.5rem;
   border: none;
   margin: 0.5rem;
   padding: 0.5rem;
@@ -25,7 +28,12 @@ dialog {
   right: 0;
   top: 0;
 }
+.dialog-close:hover {
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+}
 
+/* Dialog modal animations */
 dialog[open] {
   opacity: 1;
   transform: translateY(0);
