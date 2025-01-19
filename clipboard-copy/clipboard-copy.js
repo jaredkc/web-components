@@ -35,7 +35,7 @@ if (!customElements.get('clipboard-copy')) {
     }
 
     handleInputFocus() {
-      // this.input.select();
+      this.copyText();
       this.input.setSelectionRange(0, 99999);
       if (this.input.value.length > this.inputSize) {
         this.input.setAttribute('size', this.input.value.length);
