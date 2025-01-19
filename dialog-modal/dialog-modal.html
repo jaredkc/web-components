@@ -9,12 +9,14 @@
     <script src="dialog-modal.js" defer="defer"></script>
   </head>
   <body class="body-center">
-    <div class="max-w-sm mx-4 my-12">
-      <h1 class="text-3xl">Dialog Modal</h1>
-      <p class="mt-1 text-xl">
-        Simple <code>&lt;dialog-opener&gt;</code> and <code>&lt;dialog-modal&gt;</code> components on top of native
-        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog">dialog</a> element.
-      </p>
+    <div class="w-full max-w-sm mx-4 my-12">
+      <h1 class="mb-1 text-3xl">Dialog Modal</h1>
+      <div class="prose md:prose-lg">
+        <p>
+          Simple <code>&lt;dialog-opener&gt;</code> and <code>&lt;dialog-modal&gt;</code> components to extend the
+          native <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog">dialog</a> element.
+        </p>
+      </div>
 
       <ul class="mt-12 space-y-8">
         <li>
@@ -54,7 +56,13 @@
             </label>
             <label for="email" class="block">
               Enter your email:
-              <input class="w-full px-4 py-2 text-sm border border-gray-300 rounded-md" type="email" name="email" id="email" required />
+              <input
+                class="w-full px-4 py-2 text-sm border border-gray-300 rounded-md"
+                type="email"
+                name="email"
+                id="email"
+                required
+              />
             </label>
             <input type="submit" value="Subscribe!" class="btn" />
           </form>
