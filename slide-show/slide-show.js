@@ -9,11 +9,6 @@ class SlideShow extends HTMLElement {
 
   connectedCallback() {
     this.init();
-  }
-
-  init() {
-    this.slides[0].classList.add('active');
-    this.start();
 
     this.addEventListener('mouseenter', () => this.stop());
     this.addEventListener('mouseleave', () => this.start());
@@ -21,9 +16,22 @@ class SlideShow extends HTMLElement {
     this.addEventListener('touchend', (e) => this.handleSwipeEnd(e));
 
     // Add event listeners for click and drag functionality
+    document.addEventListener('mouseup', (e) => this.handleDragEnd(e)); // document incase mouse leaves the element
     this.addEventListener('mousedown', (e) => this.handleDragStart(e));
     this.addEventListener('mousemove', (e) => this.handleDragMove(e));
-    this.addEventListener('mouseup', (e) => this.handleDragEnd(e));
+    this.addEventListener('selectstart', (e) => e.preventDefault()); // Prevent text selection during drag
+
+    // Stop slideshow when focus is within
+    this.addEventListener('focusin', () => this.stop());
+
+    // Add keyboard navigation support
+    this.addEventListener('keydown', (e) => this.handleKeydown(e));
+  }
+
+  init() {
+    this.slides[0].classList.add('active');
+    this.updateAriaAttributes();
+    this.start();
   }
 
   start() {
@@ -34,16 +42,29 @@ class SlideShow extends HTMLElement {
     clearInterval(this.timer);
   }
 
-  nextSlide() {
+  setSlideInactive() {
     this.slides[this.currentIndex].classList.remove('active');
+    // if focus is on or within the current slide, prevent hidden focus
+    if (
+      document.activeElement === this.slides[this.currentIndex] ||
+      this.slides[this.currentIndex].contains(document.activeElement)
+    ) {
+      this.focus();
+    }
+  }
+
+  nextSlide() {
+    this.setSlideInactive();
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     this.slides[this.currentIndex].classList.add('active');
+    this.updateAriaAttributes();
   }
 
   prevSlide() {
-    this.slides[this.currentIndex].classList.remove('active');
+    this.setSlideInactive();
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
     this.slides[this.currentIndex].classList.add('active');
+    this.updateAriaAttributes();
   }
 
   handleSwipeStart(e) {
@@ -61,8 +82,8 @@ class SlideShow extends HTMLElement {
   }
 
   handleDragStart(e) {
-    this.stop(); // May not be necessary, keeping incase stop on mouseenter is removed
     e.preventDefault(); // Prevent default behavior selecting an element
+    this.stop(); // May not be necessary, keeping incase stop on mouseenter is removed
     this.isDragging = true;
     this.startX = e.clientX;
   }
@@ -80,6 +101,25 @@ class SlideShow extends HTMLElement {
     if (this.startX - endX > 50) {
       this.nextSlide();
     } else if (endX - this.startX > 50) {
+      this.prevSlide();
+    }
+  }
+
+  updateAriaAttributes() {
+    this.slides.forEach((slide, index) => {
+      const isActive = index === this.currentIndex;
+      // Disable links in inactive slides
+      const links = slide.querySelectorAll('a');
+      links.forEach((link) => {
+        link.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+    });
+  }
+
+  handleKeydown(e) {
+    if (e.key === 'ArrowRight') {
+      this.nextSlide();
+    } else if (e.key === 'ArrowLeft') {
       this.prevSlide();
     }
   }

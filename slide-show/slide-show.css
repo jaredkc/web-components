@@ -1,10 +1,9 @@
 slide-show {
   display: block;
-  margin: 2rem;
-  position: relative;
   overflow: hidden;
-  width: calc(100% - 4rem);
-  height: calc(100vh - 4rem);
+  position: relative;
+  width: 100%;
+  height: 100dvh;
   max-height: 800px;
 }
 
