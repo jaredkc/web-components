@@ -1,7 +1,8 @@
 class SlideShow extends HTMLElement {
   constructor() {
     super();
-    this.slides = this.querySelectorAll('.slide');
+    this.slides = this.querySelectorAll('.slide-show__slide');
+    this.controls = this.querySelectorAll('.slide-show__controls button');
     this.interval = parseInt(this.dataset.interval, 10) || 5000;
     this.currentIndex = 0;
     this.timer = null;
@@ -26,10 +27,15 @@ class SlideShow extends HTMLElement {
 
     // Add keyboard navigation support
     this.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+    // Add event listeners for control buttons
+    this.controls.forEach((control) => {
+      control.addEventListener('click', (e) => this.handleControlClick(e));
+    });
   }
 
   init() {
-    this.slides[0].classList.add('active');
+    // this.slides[0].classList.add('active');
     this.updateAriaAttributes();
     this.start();
   }
@@ -39,6 +45,7 @@ class SlideShow extends HTMLElement {
   }
 
   stop() {
+    console.log('stop');
     clearInterval(this.timer);
   }
 
@@ -63,6 +70,22 @@ class SlideShow extends HTMLElement {
   prevSlide() {
     this.setSlideInactive();
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.slides[this.currentIndex].classList.add('active');
+    this.updateAriaAttributes();
+  }
+
+  handleControlClick(e) {
+    this.setSlideInactive();
+    const name = e.target.name;
+    if (name === 'prev') {
+      this.prevSlide();
+      return;
+    }
+    if (name === 'next') {
+      this.nextSlide();
+      return;
+    }
+    this.currentIndex = parseInt(name, 10);
     this.slides[this.currentIndex].classList.add('active');
     this.updateAriaAttributes();
   }
@@ -111,7 +134,11 @@ class SlideShow extends HTMLElement {
       // Disable links in inactive slides
       const links = slide.querySelectorAll('a');
       links.forEach((link) => {
-        link.setAttribute('tabindex', isActive ? '0' : '-1');
+        if (isActive) {
+          link.removeAttribute('tabindex');
+        } else {
+          link.setAttribute('tabindex', '-1');
+        }
       });
     });
   }

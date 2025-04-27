@@ -10,13 +10,7 @@
   <body>
     <header class="flex items-center justify-between p-4 border-b md:px-8">
       <h1>Image Slide Show</h1>
-      <nav>
-        <ul class="flex gap-4">
-          <li><a href="#link-one">Link One</a></li>
-          <li><a href="#link-two">Link Two</a></li>
-          <li><a href="#link-three">Link Three</a></li>
-        </ul>
-      </nav>
+      🖼️
     </header>
     <slide-show
       data-interval="3000"
@@ -26,55 +20,60 @@
       aria-live="polite"
       aria-label="Image slideshow"
     >
-      <div class="slide active" data-index="0">
-        <img
-          src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
-          alt="Slide 1"
-        />
-        <div class="slide__content">
-          <h2>Slide 1</h2>
-          <a href="#link-one">Learn More</a>
+      <div id="slide-show-id" class="slide-show__track">
+        <div class="slide-show__slide active" data-index="0">
+          <img
+            src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
+            alt="Slide 1"
+          />
+          <div class="slide-show__content">
+            <h2>Slide 1</h2>
+            <a href="#link-one">Learn More</a>
+          </div>
+        </div>
+        <div class="slide-show__slide" data-index="1">
+          <img
+            src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
+            alt="Slide 2"
+          />
+          <div class="slide-show__content">
+            <h2>Slide 2</h2>
+            <a href="#link-two">Learn More</a>
+          </div>
+        </div>
+        <div class="slide-show__slide" data-index="2">
+          <img
+            src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
+            alt="Slide 3"
+          />
+          <div class="slide-show__content">
+            <h2>Slide 3</h2>
+            <a href="#link-3">Learn More</a>
+          </div>
         </div>
       </div>
-      <div class="slide" data-index="1">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
-          alt="Slide 2"
-        />
-        <div class="slide__content">
-          <h2>Slide 2</h2>
-          <a href="#link-two">Learn More</a>
+
+      <div class="slide-show__controls">
+        <button type="button" name="prev" aria-label="Previous slide" aria-controls="slide-show-id">
+          &lt; Previous
+        </button>
+        <div class="">
+          <button
+            type="button"
+            name="0"
+            aria-label="Load slide 1 of 2"
+            aria-controls="slide-show-id"
+            class="active"
+            aria-current="true"
+          >
+            1
+          </button>
+          <button type="button" name="1" aria-label="Load slide 2 of 2" aria-controls="slide-show-id">2</button>
         </div>
-      </div>
-      <div class="slide" data-index="2">
-        <img
-          src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
-          alt="Slide 3"
-        />
-        <div class="slide__content">
-          <h2>Slide 3</h2>
-          <a href="#link-3">Learn More</a>
-        </div>
+        <button type="button" name="next" aria-label="Next slide" aria-controls="slide-show-id">Next &gt;</button>
       </div>
     </slide-show>
-    <main class="flex flex-col gap-8 p-4 py-12 md:px-8 md:gap-12">
-      <section class="p-4 bg-gray-100 md:p-8">
-        <h2>Welcome to Our Slide Show</h2>
-        <p>Enjoy a curated selection of beautiful images.</p>
-      </section>
-      <section class="p-4 bg-gray-100 md:p-8">
-        <h2>Featured Images</h2>
-        <p>Discover the beauty of nature and architecture.</p>
-      </section>
-    </main>
 
-    <footer class="flex items-center justify-between p-4 border-t md:px-8">
-      <p>&copy; 2023 Image Slide Show. All rights reserved.</p>
-      <p>
-        Follow us on social media: <a href="#facebook">Facebook</a>, <a href="#twitter">Twitter</a>,
-        <a href="#instagram">Instagram</a>
-      </p>
-    </footer>
-    <script src="slide-show.js"></script>
+    <script src="slide-show.js" defer></script>
   </body>
 </html>

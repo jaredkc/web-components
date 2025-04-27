@@ -1,13 +1,16 @@
 slide-show {
   display: block;
-  overflow: hidden;
+}
+
+.slide-show__track {
   position: relative;
   width: 100%;
   height: 100dvh;
   max-height: 800px;
+  overflow: hidden;
 }
 
-.slide {
+.slide-show__slide {
   position: absolute;
   top: 0;
   left: 0;
@@ -18,12 +21,12 @@ slide-show {
   z-index: 1;
 }
 
-.slide.active {
+.slide-show__slide.active {
   opacity: 1;
   z-index: 2;
 }
 
-.slide img {
+.slide-show__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -31,11 +34,11 @@ slide-show {
   transition: transform 20s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.slide.active img {
+.slide-show__slide.active img {
   transform: scale(1.1);
 }
 
-.slide__content {
+.slide-show__content {
   background-color: rgba(255, 255, 255, 0.75);
   padding: clamp(0.5rem, 1rem, 1rem);
   position: absolute;
