@@ -19,8 +19,9 @@ class SlideShow extends HTMLElement {
     this.addEventListener('touchend', (e) => this.handleSwipeEnd(e));
 
     // Add event listeners for click and drag functionality
-    document.addEventListener('mouseup', (e) => this.handleDragEnd(e)); // document incase mouse leaves the element
+    document.addEventListener('mouseup', (e) => this.handleDragEnd(e)); // document in case mouse leaves the element
     this.addEventListener('mousemove', (e) => this.handleDragMove(e));
+    this.addEventListener('mousedown', (e) => this.handleDragStart(e));
     this.addEventListener('selectstart', (e) => e.preventDefault()); // Prevent text selection during drag
 
     // Stop slideshow when focus is within
@@ -35,24 +36,34 @@ class SlideShow extends HTMLElement {
     });
   }
 
+  disconnectedCallback() {
+    this.stop();
+    document.removeEventListener('mouseup', this.handleDragEnd);
+  }
+
   init() {
     this.updateAriaAttributes();
     this.start();
-    // Slide is visiable on page load, but we still want the image transition.
-    setTimeout(() => {
-      this.slides[0].classList.add(this.activeSlideClass);
-    }, 1);
+    // Slide is visible on page load, but we still want the image transition.
+    if (this.slides[0]) {
+      setTimeout(() => {
+        this.slides[0].classList.add(this.activeSlideClass);
+      }, 1);
+    }
   }
 
   start() {
+    if (this.timer) return;
     this.timer = setInterval(() => this.nextSlide(), this.interval);
   }
 
   stop() {
     clearInterval(this.timer);
+    this.timer = null;
   }
 
   setSlideInactive() {
+    if (!this.slides[this.currentIndex]) return;
     this.slides[this.currentIndex].classList.remove(this.activeSlideClass);
     this.slides[this.currentIndex].setAttribute('aria-hidden', 'true');
     this.buttons.forEach((button) => button.removeAttribute('aria-current'));
@@ -66,6 +77,7 @@ class SlideShow extends HTMLElement {
   }
 
   setSlideActive() {
+    if (!this.slides[this.currentIndex]) return;
     this.slides[this.currentIndex].classList.add(this.activeSlideClass);
     this.slides[this.currentIndex].setAttribute('aria-hidden', 'false');
     this.buttons.forEach((button) => {
@@ -122,7 +134,7 @@ class SlideShow extends HTMLElement {
 
   handleDragStart(e) {
     e.preventDefault(); // Prevent default behavior selecting an element
-    this.stop(); // Incase stop on mouseenter is disabled
+    this.stop(); // In case stop on mouseenter is disabled
     this.isDragging = true;
     this.startX = e.clientX;
   }
