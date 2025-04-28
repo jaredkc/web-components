@@ -6,6 +6,7 @@ class SlideShow extends HTMLElement {
     this.interval = parseInt(this.dataset.interval, 10) || 5000;
     this.currentIndex = 0;
     this.timer = null;
+    this.activeClasses = ['active', 'transition'];
   }
 
   connectedCallback() {
@@ -35,9 +36,12 @@ class SlideShow extends HTMLElement {
   }
 
   init() {
-    // this.slides[0].classList.add('active');
     this.updateAriaAttributes();
     this.start();
+    // Slide is visiable on page load, but we still want the image transition.
+    setTimeout(() => {
+      this.slides[0].classList.add('transition');
+    }, 1);
   }
 
   start() {
@@ -50,7 +54,7 @@ class SlideShow extends HTMLElement {
   }
 
   setSlideInactive() {
-    this.slides[this.currentIndex].classList.remove('active');
+    this.slides[this.currentIndex].classList.remove(...this.activeClasses);
     // if focus is on or within the current slide, prevent hidden focus
     if (
       document.activeElement === this.slides[this.currentIndex] ||
@@ -63,14 +67,14 @@ class SlideShow extends HTMLElement {
   nextSlide() {
     this.setSlideInactive();
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    this.slides[this.currentIndex].classList.add('active');
+    this.slides[this.currentIndex].classList.add(...this.activeClasses);
     this.updateAriaAttributes();
   }
 
   prevSlide() {
     this.setSlideInactive();
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    this.slides[this.currentIndex].classList.add('active');
+    this.slides[this.currentIndex].classList.add(...this.activeClasses);
     this.updateAriaAttributes();
   }
 
@@ -86,7 +90,7 @@ class SlideShow extends HTMLElement {
       return;
     }
     this.currentIndex = parseInt(name, 10);
-    this.slides[this.currentIndex].classList.add('active');
+    this.slides[this.currentIndex].classList.add(...this.activeClasses);
     this.updateAriaAttributes();
   }
 
@@ -106,7 +110,7 @@ class SlideShow extends HTMLElement {
 
   handleDragStart(e) {
     e.preventDefault(); // Prevent default behavior selecting an element
-    this.stop(); // May not be necessary, keeping incase stop on mouseenter is removed
+    this.stop(); // Incase stop on mouseenter is disabled
     this.isDragging = true;
     this.startX = e.clientX;
   }

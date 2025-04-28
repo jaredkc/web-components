@@ -21,6 +21,14 @@ slide-show {
   z-index: 1;
 }
 
+.slide-show__content {
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: clamp(0.5rem, 1rem, 1rem);
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+}
+
 .slide-show__slide.active {
   opacity: 1;
   z-index: 2;
@@ -34,14 +42,10 @@ slide-show {
   transition: transform 20s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.slide-show__slide.active img {
+/*
+ * Added vis JS so the slide if visiable on page load,
+ * but we still get the image transition.
+ */
+.slide-show__slide.transition img {
   transform: scale(1.1);
-}
-
-.slide-show__content {
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: clamp(0.5rem, 1rem, 1rem);
-  position: absolute;
-  bottom: 60px;
-  left: 20px;
 }

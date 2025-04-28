@@ -53,24 +53,45 @@
         </div>
       </div>
 
-      <div class="slide-show__controls">
-        <button type="button" name="prev" aria-label="Previous slide" aria-controls="slide-show-id">
+      <div class="flex items-center justify-center gap-2 slide-show__controls">
+        <button
+          class="px-4 py-2 border rounded"
+          type="button"
+          name="prev"
+          aria-label="Previous slide"
+          aria-controls="slide-show-id"
+        >
           &lt; Previous
         </button>
-        <div class="">
-          <button
-            type="button"
-            name="0"
-            aria-label="Load slide 1 of 2"
-            aria-controls="slide-show-id"
-            class="active"
-            aria-current="true"
-          >
-            1
-          </button>
-          <button type="button" name="1" aria-label="Load slide 2 of 2" aria-controls="slide-show-id">2</button>
-        </div>
-        <button type="button" name="next" aria-label="Next slide" aria-controls="slide-show-id">Next &gt;</button>
+        <button
+          class="px-4 py-2 border rounded"
+          type="button"
+          name="0"
+          aria-label="Load slide 1 of 2"
+          aria-controls="slide-show-id"
+          class="active"
+          aria-current="true"
+        >
+          1
+        </button>
+        <button
+          class="px-4 py-2 border rounded"
+          type="button"
+          name="1"
+          aria-label="Load slide 2 of 2"
+          aria-controls="slide-show-id"
+        >
+          2
+        </button>
+        <button
+          class="px-4 py-2 border rounded"
+          type="button"
+          name="next"
+          aria-label="Next slide"
+          aria-controls="slide-show-id"
+        >
+          Next &gt;
+        </button>
       </div>
     </slide-show>
 
