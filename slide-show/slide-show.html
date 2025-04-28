@@ -9,11 +9,11 @@
   </head>
   <body>
     <header class="flex items-center justify-between p-4 border-b md:px-8">
-      <h1>Image Slide Show</h1>
-      🖼️
+      <div>Slide Show Component</div>
+      <div>🖼️</div>
     </header>
     <slide-show
-      data-interval="3000"
+      data-interval="5000"
       tabindex="0"
       role="region"
       aria-roledescription="carousel"
@@ -21,34 +21,34 @@
       aria-label="Image slideshow"
     >
       <div id="slide-show-id" class="slide-show__track">
-        <div class="slide-show__slide active" data-index="0">
+        <div class="slide-show__slide" aria-hidden="false" data-index="0">
           <img
             src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 1"
           />
           <div class="slide-show__content">
             <h2>Slide 1</h2>
-            <a href="#link-one">Learn More</a>
+            <a href="#">Learn More</a>
           </div>
         </div>
-        <div class="slide-show__slide" data-index="1">
+        <div class="slide-show__slide" aria-hidden="true" data-index="1">
           <img
             src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 2"
           />
           <div class="slide-show__content">
             <h2>Slide 2</h2>
-            <a href="#link-two">Learn More</a>
+            <a href="#">Learn More</a>
           </div>
         </div>
-        <div class="slide-show__slide" data-index="2">
+        <div class="slide-show__slide" aria-hidden="true" data-index="2">
           <img
             src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 3"
           />
           <div class="slide-show__content">
             <h2>Slide 3</h2>
-            <a href="#link-3">Learn More</a>
+            <a href="#">Learn More</a>
           </div>
         </div>
       </div>
@@ -64,27 +64,35 @@
           &lt; Previous
         </button>
         <button
-          class="px-4 py-2 border rounded"
+          class="px-4 py-2 border rounded slide-show__button"
           type="button"
           name="0"
-          aria-label="Load slide 1 of 2"
+          aria-label="Load slide 1 of 3"
           aria-controls="slide-show-id"
-          class="active"
           aria-current="true"
         >
           1
         </button>
         <button
-          class="px-4 py-2 border rounded"
+          class="px-4 py-2 border rounded slide-show__button"
           type="button"
           name="1"
-          aria-label="Load slide 2 of 2"
+          aria-label="Load slide 2 of 3"
           aria-controls="slide-show-id"
         >
           2
         </button>
         <button
-          class="px-4 py-2 border rounded"
+          class="px-4 py-2 border rounded slide-show__button"
+          type="button"
+          name="2"
+          aria-label="Load slide 3 of 3"
+          aria-controls="slide-show-id"
+        >
+          3
+        </button>
+        <button
+          class="px-4 py-2 border rounded slide-show__button"
           type="button"
           name="next"
           aria-label="Next slide"
@@ -94,6 +102,22 @@
         </button>
       </div>
     </slide-show>
+
+    <article class="prose mx-auto my-12 md:my-24 px-4 font-light">
+      <h1 class="font-semibold mb-2">Slide Show Component</h1>
+      <p class="lead mt-0">A fully accessible, responsive slide show component.</p>
+      <ul>
+        <li>Automatic slideshow with configurable interval</li>
+        <li>Manual navigation controls</li>
+        <li>Touch swipe and mouse drag support</li>
+        <li>Keyboard navigation (left/right arrow keys)</li>
+        <li>Pause on hover/focus</li>
+        <li>Smooth transitions between slides</li>
+        <li>ARIA attributes for screen readers</li>
+        <li>ARIA live regions for dynamic content</li>
+        <li>Disabled links in inactive slides</li>
+      </ul>
+    </article>
 
     <script src="slide-show.js" defer></script>
   </body>

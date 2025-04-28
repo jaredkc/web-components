@@ -1,3 +1,10 @@
+/*
+ * Slide Show
+ *
+ * This is the base styles for a functional slide show.
+ * Additional styles are added handled with Tailwind CSS or global styles.
+ */
+
 slide-show {
   display: block;
 }
@@ -21,15 +28,7 @@ slide-show {
   z-index: 1;
 }
 
-.slide-show__content {
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: clamp(0.5rem, 1rem, 1rem);
-  position: absolute;
-  bottom: 60px;
-  left: 20px;
-}
-
-.slide-show__slide.active {
+.slide-show__slide[aria-hidden="false"] {
   opacity: 1;
   z-index: 2;
 }
@@ -42,10 +41,26 @@ slide-show {
   transition: transform 20s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/*
- * Added vis JS so the slide if visiable on page load,
- * but we still get the image transition.
+/**
+ * This class is added via JavaScript.
+ * The slide is visible on page load, but we still want image transition.
  */
-.slide-show__slide.transition img {
+.slide-show__slide--transition img {
   transform: scale(1.1);
+}
+
+.slide-show__button[aria-current="true"] {
+  background-color: teal;
+  color: white;
+}
+
+/**
+ * Optional, content needs may vary.
+ */
+.slide-show__content {
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: clamp(0.5rem, 1rem, 1rem);
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
 }

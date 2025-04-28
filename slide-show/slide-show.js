@@ -2,11 +2,12 @@ class SlideShow extends HTMLElement {
   constructor() {
     super();
     this.slides = this.querySelectorAll('.slide-show__slide');
-    this.controls = this.querySelectorAll('.slide-show__controls button');
+    this.buttons = this.querySelectorAll('.slide-show__button');
     this.interval = parseInt(this.dataset.interval, 10) || 5000;
     this.currentIndex = 0;
     this.timer = null;
-    this.activeClasses = ['active', 'transition'];
+    // To trigger the image transition, but still have the slide visible on page load.
+    this.activeSlideClass = 'slide-show__slide--transition';
   }
 
   connectedCallback() {
@@ -19,7 +20,6 @@ class SlideShow extends HTMLElement {
 
     // Add event listeners for click and drag functionality
     document.addEventListener('mouseup', (e) => this.handleDragEnd(e)); // document incase mouse leaves the element
-    this.addEventListener('mousedown', (e) => this.handleDragStart(e));
     this.addEventListener('mousemove', (e) => this.handleDragMove(e));
     this.addEventListener('selectstart', (e) => e.preventDefault()); // Prevent text selection during drag
 
@@ -30,8 +30,8 @@ class SlideShow extends HTMLElement {
     this.addEventListener('keydown', (e) => this.handleKeydown(e));
 
     // Add event listeners for control buttons
-    this.controls.forEach((control) => {
-      control.addEventListener('click', (e) => this.handleControlClick(e));
+    this.buttons.forEach((button) => {
+      button.addEventListener('click', (e) => this.handleControlClick(e));
     });
   }
 
@@ -40,7 +40,7 @@ class SlideShow extends HTMLElement {
     this.start();
     // Slide is visiable on page load, but we still want the image transition.
     setTimeout(() => {
-      this.slides[0].classList.add('transition');
+      this.slides[0].classList.add(this.activeSlideClass);
     }, 1);
   }
 
@@ -49,12 +49,13 @@ class SlideShow extends HTMLElement {
   }
 
   stop() {
-    console.log('stop');
     clearInterval(this.timer);
   }
 
   setSlideInactive() {
-    this.slides[this.currentIndex].classList.remove(...this.activeClasses);
+    this.slides[this.currentIndex].classList.remove(this.activeSlideClass);
+    this.slides[this.currentIndex].setAttribute('aria-hidden', 'true');
+    this.buttons.forEach((button) => button.removeAttribute('aria-current'));
     // if focus is on or within the current slide, prevent hidden focus
     if (
       document.activeElement === this.slides[this.currentIndex] ||
@@ -64,18 +65,29 @@ class SlideShow extends HTMLElement {
     }
   }
 
+  setSlideActive() {
+    this.slides[this.currentIndex].classList.add(this.activeSlideClass);
+    this.slides[this.currentIndex].setAttribute('aria-hidden', 'false');
+    this.buttons.forEach((button) => {
+      if (button.name === this.currentIndex.toString()) {
+        button.setAttribute('aria-current', 'true');
+      }
+    });
+
+    this.updateAriaAttributes();
+  }
+
   nextSlide() {
     this.setSlideInactive();
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    this.slides[this.currentIndex].classList.add(...this.activeClasses);
-    this.updateAriaAttributes();
+
+    this.setSlideActive();
   }
 
   prevSlide() {
     this.setSlideInactive();
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    this.slides[this.currentIndex].classList.add(...this.activeClasses);
-    this.updateAriaAttributes();
+    this.setSlideActive();
   }
 
   handleControlClick(e) {
@@ -90,8 +102,8 @@ class SlideShow extends HTMLElement {
       return;
     }
     this.currentIndex = parseInt(name, 10);
-    this.slides[this.currentIndex].classList.add(...this.activeClasses);
-    this.updateAriaAttributes();
+
+    this.setSlideActive();
   }
 
   handleSwipeStart(e) {
@@ -135,7 +147,7 @@ class SlideShow extends HTMLElement {
   updateAriaAttributes() {
     this.slides.forEach((slide, index) => {
       const isActive = index === this.currentIndex;
-      // Disable links in inactive slides
+      // Disable links in inactive slides for keyboard navigation and accessibility
       const links = slide.querySelectorAll('a');
       links.forEach((link) => {
         if (isActive) {
