@@ -104,7 +104,7 @@ class SlideShow extends HTMLElement {
 
   handleControlClick(e) {
     this.setSlideInactive();
-    const name = e.target.name;
+    const name = e.currentTarget.name;
     if (name === 'prev') {
       this.prevSlide();
       return;
