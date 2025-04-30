@@ -3,6 +3,7 @@ class SlideShow extends HTMLElement {
     super();
     this.slides = this.querySelectorAll('.slide-show__slide');
     this.buttons = this.querySelectorAll('.slide-show__button');
+    this.autorotate = this.dataset.autorotate === 'true';
     this.interval = parseInt(this.dataset.interval, 10) || 5000;
     this.currentIndex = 0;
     this.timer = null;
@@ -54,12 +55,16 @@ class SlideShow extends HTMLElement {
 
   start() {
     if (this.timer) return;
-    this.timer = setInterval(() => this.nextSlide(), this.interval);
+    if (this.autorotate) {
+      this.timer = setInterval(() => this.nextSlide(), this.interval);
+    }
   }
 
   stop() {
-    clearInterval(this.timer);
-    this.timer = null;
+    if (this.autorotate) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
   }
 
   setSlideInactive() {
