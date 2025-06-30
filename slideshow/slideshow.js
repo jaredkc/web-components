@@ -1,14 +1,16 @@
 class SlideShow extends HTMLElement {
   constructor() {
     super();
-    this.slides = this.querySelectorAll('.slide-show__slide');
-    this.buttons = this.querySelectorAll('.slide-show__button');
+    this.slides = this.querySelectorAll('.slideshow__slide');
+    this.buttons = this.querySelectorAll('.slideshow__button');
+    this.slides = this.querySelectorAll('.slideshow__slide');
+    this.buttons = this.querySelectorAll('.slideshow__button');
     this.autorotate = this.dataset.autorotate === 'true';
     this.interval = parseInt(this.dataset.interval, 10) || 5000;
     this.currentIndex = 0;
     this.timer = null;
     // To trigger the image transition, but still have the slide visible on page load.
-    this.activeSlideClass = 'slide-show__slide--transition';
+    this.activeSlideClass = 'slideshow__slide--transition';
   }
 
   connectedCallback() {
@@ -185,4 +187,4 @@ class SlideShow extends HTMLElement {
   }
 }
 
-customElements.define('slide-show', SlideShow);
+customElements.define('slideshow-component', SlideShow);

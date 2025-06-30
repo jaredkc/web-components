@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slide Show</title>
+    <title>Slideshow</title>
     <link rel="stylesheet" href="../assets/tailwind.build.css" />
-    <link rel="stylesheet" href="slide-show.css" />
+    <link rel="stylesheet" href="slideshow.css" />
   </head>
   <body>
-    <header class="flex items-center justify-between p-4 border-b md:px-8">
-      <div>Slide Show Component</div>
+    <header class="flex justify-between items-center p-4 border-b md:px-8">
+      <div>Slideshow Component</div>
       <div>🖼️</div>
     </header>
-    <slide-show
+    <slideshow-component
       data-interval="5000"
       data-autorotate="true"
       tabindex="0"
@@ -21,88 +21,61 @@
       aria-live="polite"
       aria-label="Image slideshow"
     >
-      <div id="slide-show-id" class="slide-show__track">
-        <div class="slide-show__slide" aria-hidden="false" data-index="0">
+      <div id="slideshow-id" class="slideshow__track">
+        <div class="slideshow__slide" aria-hidden="false" data-index="0">
           <img
             src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 1"
           />
-          <div class="slide-show__content">
+          <div class="slideshow__content">
             <h2>Slide 1</h2>
             <a href="#">Learn More</a>
           </div>
         </div>
-        <div class="slide-show__slide" aria-hidden="true" data-index="1">
+        <div class="slideshow__slide" aria-hidden="true" data-index="1">
           <img
             src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 2"
           />
-          <div class="slide-show__content">
+          <div class="slideshow__content">
             <h2>Slide 2</h2>
             <a href="#">Learn More</a>
           </div>
         </div>
-        <div class="slide-show__slide" aria-hidden="true" data-index="2">
+        <div class="slideshow__slide" aria-hidden="true" data-index="2">
           <img
             src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1200&amp;h=800&amp;q=80"
             alt="Slide 3"
           />
-          <div class="slide-show__content">
+          <div class="slideshow__content">
             <h2>Slide 3</h2>
             <a href="#">Learn More</a>
           </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-center gap-2 slide-show__controls">
+      <div class="flex gap-2 justify-center items-center slideshow__controls">
         <button
-          class="px-4 py-2 border rounded slide-show__button"
+          class="px-4 py-2 rounded border slideshow__button"
           type="button"
           name="prev"
           aria-label="Previous slide"
-          aria-controls="slide-show-id"
+          aria-controls="slideshow-id"
         >
           &lt; Previous
         </button>
+
         <button
-          class="px-4 py-2 border rounded slide-show__button"
-          type="button"
-          name="0"
-          aria-label="Load slide 1 of 3"
-          aria-controls="slide-show-id"
-          aria-current="true"
-        >
-          1
-        </button>
-        <button
-          class="px-4 py-2 border rounded slide-show__button"
-          type="button"
-          name="1"
-          aria-label="Load slide 2 of 3"
-          aria-controls="slide-show-id"
-        >
-          2
-        </button>
-        <button
-          class="px-4 py-2 border rounded slide-show__button"
-          type="button"
-          name="2"
-          aria-label="Load slide 3 of 3"
-          aria-controls="slide-show-id"
-        >
-          3
-        </button>
-        <button
-          class="px-4 py-2 border rounded slide-show__button"
+          class="px-4 py-2 rounded border slideshow__button"
           type="button"
           name="next"
           aria-label="Next slide"
-          aria-controls="slide-show-id"
+          aria-controls="slideshow-id"
         >
           Next &gt;
         </button>
       </div>
-    </slide-show>
+    </slideshow-component>
 
     <article class="px-4 mx-auto my-12 font-light prose md:my-24">
       <h1 class="mb-2 font-semibold">Slide Show Component</h1>
@@ -120,6 +93,6 @@
       </ul>
     </article>
 
-    <script src="slide-show.js" defer></script>
+    <script src="slideshow.js" defer></script>
   </body>
 </html>
