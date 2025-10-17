@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Carousel Component</title>
+    <link rel="stylesheet" href="../assets/tailwind.build.css" />
+    <link rel="stylesheet" href="carousel.css" />
+  </head>
+  <body>
+    <header class="flex justify-between items-center p-4 border-b md:px-8">
+      <div>Product Carousel Component</div>
+      <div>🛍️</div>
+    </header>
+
+    <main class="p-4 md:px-8">
+      <article class="max-w-4xl mx-auto my-12 font-light prose">
+        <h1 class="mb-2 font-semibold">Product Carousel Component</h1>
+        <p class="mt-0 lead">An extended carousel component with programmatic control methods for dynamic content management.</p>
+        <ul>
+          <li>Extends base carousel with additional functionality</li>
+          <li>Scroll to specific slides by unique ID</li>
+          <li>Add new items dynamically</li>
+          <li>Update existing slide content</li>
+          <li>Remove slides programmatically</li>
+          <li>Get current slide and all slide IDs</li>
+          <li>Perfect for product variant selection and dynamic catalogs</li>
+        </ul>
+      </article>
+
+      <!-- Product Carousel Demo -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Product Variants Carousel</h2>
+
+        <product-carousel
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Product variants carousel"
+          class="relative rounded-lg"
+        >
+          <div
+            class="carousel__track"
+            data-carousel-track
+            id="product-carousel-track"
+          >
+            <div class="carousel__slide bg-blue-100 rounded-lg p-6 text-center" data-slide-id="variant-red">
+              <h3 class="text-xl font-semibold mb-2 text-red-600">Red Variant</h3>
+              <p class="text-sm text-gray-600 mb-4">Classic red color option</p>
+              <div class="w-16 h-16 bg-red-500 rounded-full mx-auto"></div>
+              <p class="text-lg font-semibold mt-4">$29.99</p>
+            </div>
+            <div class="carousel__slide bg-green-100 rounded-lg p-6 text-center" data-slide-id="variant-blue">
+              <h3 class="text-xl font-semibold mb-2 text-blue-600">Blue Variant</h3>
+              <p class="text-sm text-gray-600 mb-4">Ocean blue color option</p>
+              <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto"></div>
+              <p class="text-lg font-semibold mt-4">$29.99</p>
+            </div>
+            <div class="carousel__slide bg-purple-100 rounded-lg p-6 text-center" data-slide-id="variant-green">
+              <h3 class="text-xl font-semibold mb-2 text-green-600">Green Variant</h3>
+              <p class="text-sm text-gray-600 mb-4">Forest green color option</p>
+              <div class="w-16 h-16 bg-green-500 rounded-full mx-auto"></div>
+              <p class="text-lg font-semibold mt-4">$29.99</p>
+            </div>
+            <div class="carousel__slide bg-orange-100 rounded-lg p-6 text-center" data-slide-id="variant-purple">
+              <h3 class="text-xl font-semibold mb-2 text-purple-600">Purple Variant</h3>
+              <p class="text-sm text-gray-600 mb-4">Royal purple color option</p>
+              <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto"></div>
+              <p class="text-lg font-semibold mt-4">$29.99</p>
+            </div>
+          </div>
+
+          <div class="carousel__controls">
+            <button
+              class="carousel__button carousel__button--left"
+              data-carousel-direction="left"
+              aria-label="Previous variant"
+              aria-controls="product-carousel-track"
+            >
+              ←
+            </button>
+            <button
+              class="carousel__button carousel__button--right"
+              data-carousel-direction="right"
+              aria-label="Next variant"
+              aria-controls="product-carousel-track"
+            >
+              →
+            </button>
+          </div>
+        </product-carousel>
+      </section>
+
+      <!-- Control Panel -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Control Panel</h2>
+
+        <div class="bg-gray-100 rounded-lg p-6 space-y-4">
+          <!-- Scroll to specific variant -->
+          <div>
+            <h3 class="font-semibold mb-2">Scroll to Variant:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="scrollToVariant('variant-red')" class="px-4 py-2 bg-red-500 text-white border border-red-600 rounded hover:bg-red-600 transition-colors">Red</button>
+              <button onclick="scrollToVariant('variant-blue')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Blue</button>
+              <button onclick="scrollToVariant('variant-green')" class="px-4 py-2 bg-green-500 text-white border border-green-600 rounded hover:bg-green-600 transition-colors">Green</button>
+              <button onclick="scrollToVariant('variant-purple')" class="px-4 py-2 bg-purple-500 text-white border border-purple-600 rounded hover:bg-purple-600 transition-colors">Purple</button>
+            </div>
+          </div>
+
+          <!-- Add new variant -->
+          <div>
+            <h3 class="font-semibold mb-2">Add New Variant:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="addYellowVariant()" class="px-4 py-2 bg-yellow-500 text-white border border-yellow-600 rounded hover:bg-yellow-600 transition-colors">Add Yellow</button>
+              <button onclick="addBlackVariant()" class="px-4 py-2 bg-gray-800 text-white border border-gray-900 rounded hover:bg-gray-900 transition-colors">Add Black</button>
+              <button onclick="addWhiteVariant()" class="px-4 py-2 bg-white text-gray-800 border border-gray-300 rounded hover:bg-gray-50 transition-colors">Add White</button>
+            </div>
+          </div>
+
+          <!-- Update existing variant -->
+          <div>
+            <h3 class="font-semibold mb-2">Update Variant Price:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="updateRedPrice()" class="px-4 py-2 bg-red-100 text-red-800 border border-red-300 rounded hover:bg-red-200 transition-colors">Update Red Price</button>
+              <button onclick="updateBluePrice()" class="px-4 py-2 bg-blue-100 text-blue-800 border border-blue-300 rounded hover:bg-blue-200 transition-colors">Update Blue Price</button>
+            </div>
+          </div>
+
+          <!-- Utility functions -->
+          <div>
+            <h3 class="font-semibold mb-2">Utility Functions:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="showCurrentSlide()" class="px-4 py-2 bg-gray-500 text-white border border-gray-600 rounded hover:bg-gray-600 transition-colors">Show Current Slide</button>
+              <button onclick="showAllSlides()" class="px-4 py-2 bg-gray-500 text-white border border-gray-600 rounded hover:bg-gray-600 transition-colors">Show All Slide IDs</button>
+              <button onclick="removeLastSlide()" class="px-4 py-2 bg-red-600 text-white border border-red-700 rounded hover:bg-red-700 transition-colors">Remove Last Slide</button>
+            </div>
+          </div>
+
+          <!-- Status display -->
+          <div id="status" class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
+            Ready for interactions
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Examples -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Usage Examples</h2>
+
+        <div class="bg-gray-100 rounded-lg p-4">
+          <h3 class="font-semibold mb-2">JavaScript API:</h3>
+          <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>// Get the carousel element
+const carousel = document.querySelector('product-carousel');
+
+// Scroll to a specific variant
+carousel.scrollToSlide('variant-red');
+
+// Add a new product variant
+carousel.addItem('&lt;div&gt;New content&lt;/div&gt;', 'variant-yellow');
+
+// Update existing slide content
+carousel.updateSlide('variant-red', '&lt;div&gt;Updated content&lt;/div&gt;');
+
+// Get current slide ID
+const currentId = carousel.getCurrentSlideId();
+
+// Get all slide IDs
+const allIds = carousel.getSlideIds();
+
+// Remove a slide
+carousel.removeSlide('variant-yellow');</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { ProductCarouselComponent } from './product-carousel.js';
+
+      // Make functions available globally for demo buttons
+      window.scrollToVariant = (id) => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.scrollToSlide(id);
+        updateStatus(`Scrolled to ${id}`);
+      };
+
+      window.addYellowVariant = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.addItem(`
+          <h3 class="text-xl font-semibold mb-2 text-yellow-600">Yellow Variant</h3>
+          <p class="text-sm text-gray-600 mb-4">Sunny yellow color option</p>
+          <div class="w-16 h-16 bg-yellow-500 rounded-full mx-auto"></div>
+          <p class="text-lg font-semibold mt-4">$32.99</p>
+        `, 'variant-yellow');
+        updateStatus('Added yellow variant');
+      };
+
+      window.addBlackVariant = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.addItem(`
+          <h3 class="text-xl font-semibold mb-2 text-gray-800">Black Variant</h3>
+          <p class="text-sm text-gray-600 mb-4">Classic black color option</p>
+          <div class="w-16 h-16 bg-gray-900 rounded-full mx-auto"></div>
+          <p class="text-lg font-semibold mt-4">$34.99</p>
+        `, 'variant-black');
+        updateStatus('Added black variant');
+      };
+
+      window.addWhiteVariant = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.addItem(`
+          <h3 class="text-xl font-semibold mb-2 text-gray-700">White Variant</h3>
+          <p class="text-sm text-gray-600 mb-4">Clean white color option</p>
+          <div class="w-16 h-16 bg-white border-2 border-gray-300 rounded-full mx-auto"></div>
+          <p class="text-lg font-semibold mt-4">$29.99</p>
+        `, 'variant-white');
+        updateStatus('Added white variant');
+      };
+
+      window.updateRedPrice = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.updateSlide('variant-red', `
+          <h3 class="text-xl font-semibold mb-2 text-red-600">Red Variant</h3>
+          <p class="text-sm text-gray-600 mb-4">Classic red color option</p>
+          <div class="w-16 h-16 bg-red-500 rounded-full mx-auto"></div>
+          <p class="text-lg font-semibold mt-4"><span class="line-through text-gray-400">$29.99</span> $24.99</p>
+          <p class="text-sm text-green-600 font-semibold">Sale!</p>
+        `);
+        updateStatus('Updated red variant price');
+      };
+
+      window.updateBluePrice = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.updateSlide('variant-blue', `
+          <h3 class="text-xl font-semibold mb-2 text-blue-600">Blue Variant</h3>
+          <p class="text-sm text-gray-600 mb-4">Ocean blue color option</p>
+          <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto"></div>
+          <p class="text-lg font-semibold mt-4">$29.99</p>
+          <p class="text-sm text-blue-600 font-semibold">Premium</p>
+        `);
+        updateStatus('Updated blue variant with premium label');
+      };
+
+      window.showCurrentSlide = () => {
+        const carousel = document.querySelector('product-carousel');
+        const currentId = carousel.getCurrentSlideId();
+        updateStatus(`Current slide ID: ${currentId || 'Unknown'}`);
+      };
+
+      window.showAllSlides = () => {
+        const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        updateStatus(`All slide IDs: ${allIds.join(', ')}`);
+      };
+
+      window.removeLastSlide = () => {
+        const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        if (allIds.length > 0) {
+          const lastId = allIds[allIds.length - 1];
+          carousel.removeSlide(lastId);
+          updateStatus(`Removed slide: ${lastId}`);
+        } else {
+          updateStatus('No slides to remove');
+        }
+      };
+
+      function updateStatus(message) {
+        const statusEl = document.getElementById('status');
+        statusEl.textContent = message;
+        statusEl.className = 'mt-4 p-3 bg-green-50 border border-green-200 rounded text-sm';
+
+        setTimeout(() => {
+          statusEl.textContent = 'Ready for interactions';
+          statusEl.className = 'mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm';
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

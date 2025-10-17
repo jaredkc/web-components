@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel Component</title>
+    <link rel="stylesheet" href="carousel.css" />
+    <link rel="stylesheet" href="../assets/tailwind.build.css" />
+  </head>
+  <body>
+    <header class="flex justify-between items-center p-4 border-b md:px-8">
+      <div>Carousel Component</div>
+      <div>🎠</div>
+    </header>
+
+    <main class="p-4 md:px-8">
+      <article class="max-w-4xl mx-auto my-12 font-light prose">
+        <h1 class="mb-2 font-semibold">Carousel Component</h1>
+        <p class="mt-0 lead">A simple, accessible carousel component using CSS scroll-snap and native scrolling behavior.</p>
+        <ul>
+          <li>CSS-based scrolling with scroll-snap for smooth slide transitions</li>
+          <li>Fixed-width slides with consistent sizing</li>
+          <li>Prev/next buttons that slide out of view when disabled</li>
+          <li>Touch/swipe and mouse drag support</li>
+          <li>Keyboard navigation (arrow keys)</li>
+          <li>Respects reduced motion preferences</li>
+          <li>Full accessibility support with ARIA attributes</li>
+        </ul>
+      </article>
+
+      <!-- Basic Carousel Example -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Basic Carousel</h2>
+
+        <carousel-component
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Product showcase carousel"
+          class="relative rounded-lg"
+        >
+          <div
+            class="carousel__track"
+            data-carousel-track
+            id="basic-carousel-track"
+          >
+            <div class="carousel__slide bg-blue-100 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">Slide 1</h3>
+              <p>This is the first slide in our carousel.</p>
+            </div>
+            <div class="carousel__slide bg-green-100 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">Slide 2</h3>
+              <p>This is the second slide with different content.</p>
+            </div>
+            <div class="carousel__slide bg-purple-100 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">Slide 3</h3>
+              <p>Here's the third slide with more information.</p>
+            </div>
+            <div class="carousel__slide bg-orange-100 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">Slide 4</h3>
+              <p>The fourth slide completes our set.</p>
+            </div>
+            <div class="carousel__slide bg-pink-100 rounded-lg p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">Slide 5</h3>
+              <p>One more slide for good measure.</p>
+            </div>
+          </div>
+
+          <div class="carousel__controls">
+            <button
+              class="carousel__button carousel__button--left"
+              data-carousel-direction="left"
+              aria-label="Previous slide"
+              aria-controls="basic-carousel-track"
+            >
+              ←
+            </button>
+            <button
+              class="carousel__button carousel__button--right"
+              data-carousel-direction="right"
+              aria-label="Next slide"
+              aria-controls="basic-carousel-track"
+            >
+              →
+            </button>
+          </div>
+        </carousel-component>
+      </section>
+
+      <!-- Image Carousel Example -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Image Carousel</h2>
+
+        <carousel-component
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Image gallery carousel"
+          class="relative rounded-lg"
+        >
+          <div
+            class="carousel__track"
+            data-carousel-track
+            id="image-carousel-track"
+          >
+            <div class="carousel__slide w-full max-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Beautiful landscape"
+                class="w-full h-80 object-cover rounded-lg"
+              />
+              <p class="mt-2 text-center text-sm text-gray-600">Beautiful landscape</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="City skyline"
+                class="w-full h-80 object-cover rounded-lg"
+              />
+              <p class="mt-2 text-center text-sm text-gray-600">City skyline</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Ocean waves"
+                class="w-full h-80 object-cover rounded-lg"
+              />
+              <p class="mt-2 text-center text-sm text-gray-600">Ocean waves</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Mountain peak"
+                class="w-full h-80 object-cover rounded-lg"
+              />
+              <p class="mt-2 text-center text-sm text-gray-600">Mountain peak</p>
+            </div>
+          </div>
+
+          <div class="carousel__controls">
+            <button
+              class="carousel__button carousel__button--left"
+              data-carousel-direction="left"
+              aria-label="Previous image"
+              aria-controls="image-carousel-track"
+            >
+              ←
+            </button>
+            <button
+              class="carousel__button carousel__button--right"
+              data-carousel-direction="right"
+              aria-label="Next image"
+              aria-controls="image-carousel-track"
+            >
+              →
+            </button>
+          </div>
+        </carousel-component>
+      </section>
+
+      <!-- Usage Instructions -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Usage</h2>
+        <div class="bg-gray-100 rounded-lg p-4">
+          <h3 class="font-semibold mb-2">Keyboard Navigation:</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Use <kbd class="bg-white px-2 py-1 rounded border">←</kbd> and <kbd class="bg-white px-2 py-1 rounded border">→</kbd> arrow keys to navigate</li>
+            <li>Buttons are automatically disabled at the beginning and end</li>
+          </ul>
+
+          <h3 class="font-semibold mb-2 mt-4">Touch/Mouse:</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Swipe left/right on touch devices</li>
+            <li>Click and drag with mouse</li>
+            <li>Click prev/next buttons</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="carousel.js"></script>
+  </body>
+</html>
