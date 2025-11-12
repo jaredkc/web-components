@@ -24,11 +24,14 @@ export class CarouselComponent extends HTMLElement {
     if (!this.track || !this.leftBtn || !this.rightBtn) return;
 
     // Button event listeners
-    this.leftBtn.addEventListener('click', (event) => this.handleScroll(event));
-    this.rightBtn.addEventListener('click', (event) => this.handleScroll(event));
+    this.leftBtn.addEventListener('click', (event) => this.handleButtonClick(event));
+    this.rightBtn.addEventListener('click', (event) => this.handleButtonClick(event));
 
     // Scroll event listener with debouncing
     this.track.addEventListener('scroll', () => this.handleDisabledBtns());
+
+    // Resize event listener
+    window.addEventListener('resize', () => this.handleDisabledBtns());
 
     // Touch/swipe support
     this.addEventListener('touchstart', (e) => this.handleSwipeStart(e));
@@ -53,28 +56,44 @@ export class CarouselComponent extends HTMLElement {
   }
 
   calcDistance() {
-    // This accounts for scroll padding, similar to scroll-assist
-    const firstChildLeft = this.track.firstElementChild.offsetLeft;
-    return firstChildLeft === 0
-      ? this.track.firstElementChild.nextElementSibling.offsetLeft
-      : this.track.firstElementChild.offsetLeft;
+    const firstChild = this.track.firstElementChild;
+    if (!firstChild) return 0;
+
+    const secondChild = firstChild.nextElementSibling;
+
+    if (!secondChild) {
+      return firstChild.offsetWidth || this.track.offsetWidth;
+    }
+
+    const distance = secondChild.offsetLeft - firstChild.offsetLeft;
+
+    if (distance > 0) return distance;
+
+    const firstRect = firstChild.getBoundingClientRect();
+    const secondRect = secondChild.getBoundingClientRect();
+
+    return Math.abs(secondRect.left - firstRect.left) || secondRect.width || firstChild.offsetWidth;
   }
 
-  handleScroll(event) {
+  handleButtonClick(event) {
     const eventTarget = event.currentTarget.dataset.carouselDirection;
-    const distance = this.calcDistance();
-    const leftOrRight = eventTarget === 'right' ? distance : -distance;
-
-    const behavior = this.prefersReducedMotion ? 'auto' : 'smooth';
-    this.track.scrollBy({ left: leftOrRight, behavior });
+    this.scrollByDirection(eventTarget);
   }
 
   handleDisabledBtns() {
     if (this.timer !== null) clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
-      const isAtStart = this.track.scrollLeft === 0;
-      const isAtEnd = this.track.scrollWidth - this.track.scrollLeft - this.track.offsetWidth <= 32;
+      const maxLeft = Math.max(this.track.scrollWidth - this.track.offsetWidth, 0);
+
+      if (this.track.scrollLeft < 0) {
+        this.track.scrollTo({ left: 0, behavior: 'auto' });
+      } else if (this.track.scrollLeft > maxLeft) {
+        this.track.scrollTo({ left: maxLeft, behavior: 'auto' });
+      }
+
+      const isAtStart = this.track.scrollLeft <= 0;
+      const isAtEnd = maxLeft - this.track.scrollLeft <= 32;
 
       this.leftBtn.disabled = isAtStart;
       this.rightBtn.disabled = isAtEnd;
@@ -87,14 +106,13 @@ export class CarouselComponent extends HTMLElement {
 
   handleSwipeEnd(e) {
     const endX = e.changedTouches[0].clientX;
-    const distance = this.calcDistance();
 
     if (this.startX - endX > 50) {
       // Swipe left - go to next
-      this.track.scrollBy({ left: distance, behavior: this.prefersReducedMotion ? 'auto' : 'smooth' });
+      this.scrollByDirection('right');
     } else if (endX - this.startX > 50) {
       // Swipe right - go to previous
-      this.track.scrollBy({ left: -distance, behavior: this.prefersReducedMotion ? 'auto' : 'smooth' });
+      this.scrollByDirection('left');
     }
   }
 
@@ -115,25 +133,38 @@ export class CarouselComponent extends HTMLElement {
     this.isDragging = false;
 
     const endX = e.clientX;
-    const distance = this.calcDistance();
 
     if (this.startX - endX > 50) {
       // Drag left - go to next
-      this.track.scrollBy({ left: distance, behavior: this.prefersReducedMotion ? 'auto' : 'smooth' });
+      this.scrollByDirection('right');
     } else if (endX - this.startX > 50) {
       // Drag right - go to previous
-      this.track.scrollBy({ left: -distance, behavior: this.prefersReducedMotion ? 'auto' : 'smooth' });
+      this.scrollByDirection('left');
     }
   }
 
   handleKeydown(e) {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      this.rightBtn.click();
+      this.scrollByDirection('right');
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      this.leftBtn.click();
+      this.scrollByDirection('left');
     }
+  }
+
+  scrollByDirection(direction) {
+    const distance = this.calcDistance();
+    if (distance <= 0) return;
+
+    // Clamp the target scroll position to prevent overshooting the track
+    const behavior = this.prefersReducedMotion ? 'auto' : 'smooth';
+    const offset = direction === 'right' ? distance : -distance;
+    const maxLeft = Math.max(this.track.scrollWidth - this.track.offsetWidth, 0);
+    const target = Math.min(Math.max(this.track.scrollLeft + offset, 0), maxLeft);
+
+    this.track.scrollTo({ left: target, behavior });
+    this.handleDisabledBtns();
   }
 }
 
