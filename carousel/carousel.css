@@ -6,6 +6,10 @@
 
 carousel-component,
 product-carousel {
+  --gap: 0;
+  --slide-max-width: 100%;
+  --slide-min-width: 300px;
+
   display: block;
   position: relative;
 }
@@ -24,6 +28,7 @@ product-carousel {
 .carousel__track {
   display: flex;
   overflow-x: auto;
+  gap: var(--gap);
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   scrollbar-width: none; /* Firefox */
@@ -37,8 +42,10 @@ product-carousel {
 .carousel__slide {
   flex: 0 0 auto;
   scroll-snap-align: start;
+  /* Fixed width for consistent sizing, override as necessary */
+  max-width: var(--slide-max-width);
+  min-width: var(--slide-min-width);
   width: 100%;
-  max-width: 400px; /* Fixed width for consistent sizing */
 }
 
 .carousel__button {
