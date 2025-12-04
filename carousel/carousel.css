@@ -117,3 +117,54 @@ carousel-component:focus-within .carousel__button {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
+
+/* Product Carousel Thumbnails */
+product-carousel-thumbs {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id] {
+  background: transparent;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id]:hover {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id]:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id].carousel-thumb--active {
+  border-color: #3b82f6;
+  border-width: 3px;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id] img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+/* Reduced motion support for thumbnails */
+@media (prefers-reduced-motion: reduce) {
+  product-carousel-thumbs [data-thumbnail-slide-id] {
+    transition: none;
+  }
+}

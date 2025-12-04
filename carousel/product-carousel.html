@@ -24,48 +24,58 @@
           <li>Update existing slide content</li>
           <li>Remove slides programmatically</li>
           <li>Get current slide and all slide IDs</li>
-          <li>Perfect for product variant selection and dynamic catalogs</li>
+          <li>Optional thumbnail navigation component</li>
+          <li>Perfect for product media galleries (images, 3D models, videos, etc.)</li>
         </ul>
       </article>
 
       <!-- Product Carousel Demo -->
       <section class="max-w-4xl mx-auto my-12">
-        <h2 class="text-2xl font-semibold mb-4">Product Variants Carousel</h2>
+        <h2 class="text-2xl font-semibold mb-4">Product Media Carousel</h2>
 
         <product-carousel
           role="region"
           aria-roledescription="carousel"
-          aria-label="Product variants carousel"
+          aria-label="Product media carousel"
           class="relative rounded-lg"
+          data-carousel-id="product-media"
         >
           <div
             class="carousel__track"
             data-carousel-track
             id="product-carousel-track"
           >
-            <div class="carousel__slide bg-blue-100 rounded-lg p-6 text-center" data-slide-id="variant-red">
-              <h3 class="text-xl font-semibold mb-2 text-red-600">Red Variant</h3>
-              <p class="text-sm text-gray-600 mb-4">Classic red color option</p>
-              <div class="w-16 h-16 bg-red-500 rounded-full mx-auto"></div>
-              <p class="text-lg font-semibold mt-4">$29.99</p>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-1">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
+                alt="Product front view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Front view showing design details</p>
             </div>
-            <div class="carousel__slide bg-green-100 rounded-lg p-6 text-center" data-slide-id="variant-blue">
-              <h3 class="text-xl font-semibold mb-2 text-blue-600">Blue Variant</h3>
-              <p class="text-sm text-gray-600 mb-4">Ocean blue color option</p>
-              <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto"></div>
-              <p class="text-lg font-semibold mt-4">$29.99</p>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-2">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop"
+                alt="Product side view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Side profile highlighting form</p>
             </div>
-            <div class="carousel__slide bg-purple-100 rounded-lg p-6 text-center" data-slide-id="variant-green">
-              <h3 class="text-xl font-semibold mb-2 text-green-600">Green Variant</h3>
-              <p class="text-sm text-gray-600 mb-4">Forest green color option</p>
-              <div class="w-16 h-16 bg-green-500 rounded-full mx-auto"></div>
-              <p class="text-lg font-semibold mt-4">$29.99</p>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-3">
+              <img
+                src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop"
+                alt="Product detail view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Close-up detail shot</p>
             </div>
-            <div class="carousel__slide bg-orange-100 rounded-lg p-6 text-center" data-slide-id="variant-purple">
-              <h3 class="text-xl font-semibold mb-2 text-purple-600">Purple Variant</h3>
-              <p class="text-sm text-gray-600 mb-4">Royal purple color option</p>
-              <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto"></div>
-              <p class="text-lg font-semibold mt-4">$29.99</p>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-4">
+              <img
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
+                alt="Product in use"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Product in context</p>
             </div>
           </div>
 
@@ -73,7 +83,7 @@
             <button
               class="carousel__button carousel__button--left"
               data-carousel-direction="left"
-              aria-label="Previous variant"
+              aria-label="Previous image"
               aria-controls="product-carousel-track"
             >
               ←
@@ -81,13 +91,29 @@
             <button
               class="carousel__button carousel__button--right"
               data-carousel-direction="right"
-              aria-label="Next variant"
+              aria-label="Next image"
               aria-controls="product-carousel-track"
             >
               →
             </button>
           </div>
         </product-carousel>
+
+        <!-- Thumbnail Navigation -->
+        <product-carousel-thumbs data-carousel-id="product-media">
+          <button data-thumbnail-slide-id="image-1" aria-label="View front view">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=64&h=64&fit=crop" alt="Front view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-2" aria-label="View side view">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=64&h=64&fit=crop" alt="Side view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-3" aria-label="View detail view">
+            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=64&h=64&fit=crop" alt="Detail view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-4" aria-label="View product in use">
+            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=64&h=64&fit=crop" alt="Product in use thumbnail" />
+          </button>
+        </product-carousel-thumbs>
       </section>
 
       <!-- Control Panel -->
@@ -95,33 +121,30 @@
         <h2 class="text-2xl font-semibold mb-4">Control Panel</h2>
 
         <div class="bg-gray-100 rounded-lg p-6 space-y-4">
-          <!-- Scroll to specific variant -->
+          <!-- Scroll to specific image -->
           <div>
-            <h3 class="font-semibold mb-2">Scroll to Variant:</h3>
+            <h3 class="font-semibold mb-2">Scroll to Image:</h3>
             <div class="flex gap-2 flex-wrap">
-              <button onclick="scrollToVariant('variant-red')" class="px-4 py-2 bg-red-500 text-white border border-red-600 rounded hover:bg-red-600 transition-colors">Red</button>
-              <button onclick="scrollToVariant('variant-blue')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Blue</button>
-              <button onclick="scrollToVariant('variant-green')" class="px-4 py-2 bg-green-500 text-white border border-green-600 rounded hover:bg-green-600 transition-colors">Green</button>
-              <button onclick="scrollToVariant('variant-purple')" class="px-4 py-2 bg-purple-500 text-white border border-purple-600 rounded hover:bg-purple-600 transition-colors">Purple</button>
+              <button onclick="scrollToImage('image-1')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 1</button>
+              <button onclick="scrollToImage('image-2')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 2</button>
+              <button onclick="scrollToImage('image-3')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 3</button>
+              <button onclick="scrollToImage('image-4')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 4</button>
             </div>
           </div>
 
-          <!-- Add new variant -->
+          <!-- Add new image -->
           <div>
-            <h3 class="font-semibold mb-2">Add New Variant:</h3>
+            <h3 class="font-semibold mb-2">Add New Image:</h3>
             <div class="flex gap-2 flex-wrap">
-              <button onclick="addYellowVariant()" class="px-4 py-2 bg-yellow-500 text-white border border-yellow-600 rounded hover:bg-yellow-600 transition-colors">Add Yellow</button>
-              <button onclick="addBlackVariant()" class="px-4 py-2 bg-gray-800 text-white border border-gray-900 rounded hover:bg-gray-900 transition-colors">Add Black</button>
-              <button onclick="addWhiteVariant()" class="px-4 py-2 bg-white text-gray-800 border border-gray-300 rounded hover:bg-gray-50 transition-colors">Add White</button>
+              <button onclick="addNewImage()" class="px-4 py-2 bg-green-500 text-white border border-green-600 rounded hover:bg-green-600 transition-colors">Add Image</button>
             </div>
           </div>
 
-          <!-- Update existing variant -->
+          <!-- Update existing image -->
           <div>
-            <h3 class="font-semibold mb-2">Update Variant Price:</h3>
+            <h3 class="font-semibold mb-2">Update Image Caption:</h3>
             <div class="flex gap-2 flex-wrap">
-              <button onclick="updateRedPrice()" class="px-4 py-2 bg-red-100 text-red-800 border border-red-300 rounded hover:bg-red-200 transition-colors">Update Red Price</button>
-              <button onclick="updateBluePrice()" class="px-4 py-2 bg-blue-100 text-blue-800 border border-blue-300 rounded hover:bg-blue-200 transition-colors">Update Blue Price</button>
+              <button onclick="updateImageCaption()" class="px-4 py-2 bg-purple-100 text-purple-800 border border-purple-300 rounded hover:bg-purple-200 transition-colors">Update Caption</button>
             </div>
           </div>
 
@@ -146,19 +169,20 @@
       <section class="max-w-4xl mx-auto my-12">
         <h2 class="text-2xl font-semibold mb-4">Usage Examples</h2>
 
-        <div class="bg-gray-100 rounded-lg p-4">
-          <h3 class="font-semibold mb-2">JavaScript API:</h3>
-          <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>// Get the carousel element
+        <div class="bg-gray-100 rounded-lg p-4 space-y-4">
+          <div>
+            <h3 class="font-semibold mb-2">JavaScript API:</h3>
+            <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>// Get the carousel element
 const carousel = document.querySelector('product-carousel');
 
-// Scroll to a specific variant
-carousel.scrollToSlide('variant-red');
+// Scroll to a specific image
+carousel.scrollToSlide('image-1');
 
-// Add a new product variant
-carousel.addItem('&lt;div&gt;New content&lt;/div&gt;', 'variant-yellow');
+// Add a new product image
+carousel.addItem('&lt;img src="image.jpg" alt="Product" /&gt;', 'image-5');
 
 // Update existing slide content
-carousel.updateSlide('variant-red', '&lt;div&gt;Updated content&lt;/div&gt;');
+carousel.updateSlide('image-1', '&lt;img src="new-image.jpg" alt="Updated" /&gt;');
 
 // Get current slide ID
 const currentId = carousel.getCurrentSlideId();
@@ -168,75 +192,90 @@ const allIds = carousel.getSlideIds();
 
 // Remove a slide
 carousel.removeSlide('variant-yellow');</code></pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Thumbnail Navigation:</h3>
+            <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>&lt;product-carousel data-carousel-id="my-carousel"&gt;
+  &lt;div data-carousel-track&gt;
+    &lt;div data-slide-id="image-1"&gt;
+      &lt;img src="product-1.jpg" alt="Product view 1" /&gt;
+      &lt;p&gt;Caption for image 1&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div data-slide-id="image-2"&gt;
+      &lt;img src="product-2.jpg" alt="Product view 2" /&gt;
+      &lt;p&gt;Caption for image 2&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/product-carousel&gt;
+
+&lt;product-carousel-thumbs data-carousel-id="my-carousel"&gt;
+  &lt;button data-thumbnail-slide-id="image-1"&gt;
+    &lt;img src="thumb-1.jpg" alt="Thumbnail 1" /&gt;
+  &lt;/button&gt;
+  &lt;button data-thumbnail-slide-id="image-2"&gt;
+    &lt;img src="thumb-2.jpg" alt="Thumbnail 2" /&gt;
+  &lt;/button&gt;
+&lt;/product-carousel-thumbs&gt;</code></pre>
+            <p class="text-sm text-gray-600 mt-2">
+              Use <code class="bg-gray-200 px-1 rounded">data-carousel-id</code> on both components to link them together.
+              This is required and especially important when you have multiple carousels on the same page.
+              Clicking a thumbnail scrolls to the related slide, and the active thumbnail is highlighted automatically.
+            </p>
+          </div>
         </div>
       </section>
     </main>
 
     <script type="module">
       import { ProductCarouselComponent } from './product-carousel.js';
+      import './product-carousel-thumbs.js';
 
       // Make functions available globally for demo buttons
-      window.scrollToVariant = (id) => {
+      window.scrollToImage = (id) => {
         const carousel = document.querySelector('product-carousel');
         carousel.scrollToSlide(id);
         updateStatus(`Scrolled to ${id}`);
       };
 
-      window.addYellowVariant = () => {
+      window.addNewImage = () => {
         const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        const nextId = `image-${allIds.length + 1}`;
+
         carousel.addItem(`
-          <h3 class="text-xl font-semibold mb-2 text-yellow-600">Yellow Variant</h3>
-          <p class="text-sm text-gray-600 mb-4">Sunny yellow color option</p>
-          <div class="w-16 h-16 bg-yellow-500 rounded-full mx-auto"></div>
-          <p class="text-lg font-semibold mt-4">$32.99</p>
-        `, 'variant-yellow');
-        updateStatus('Added yellow variant');
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+            alt="Product additional view"
+            class="w-full h-96 object-cover rounded-lg"
+          />
+          <p class="mt-3 text-center text-sm text-gray-600">Additional product view</p>
+        `, nextId);
+
+        // Add thumbnail for new image
+        const thumbs = document.querySelector('product-carousel-thumbs');
+        if (thumbs) {
+          const newThumb = document.createElement('button');
+          newThumb.setAttribute('data-thumbnail-slide-id', nextId);
+          newThumb.setAttribute('aria-label', 'View additional image');
+          newThumb.innerHTML = '<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=64&h=64&fit=crop" alt="Additional view thumbnail" />';
+          thumbs.appendChild(newThumb);
+        }
+
+        updateStatus(`Added new image: ${nextId}`);
       };
 
-      window.addBlackVariant = () => {
+      window.updateImageCaption = () => {
         const carousel = document.querySelector('product-carousel');
-        carousel.addItem(`
-          <h3 class="text-xl font-semibold mb-2 text-gray-800">Black Variant</h3>
-          <p class="text-sm text-gray-600 mb-4">Classic black color option</p>
-          <div class="w-16 h-16 bg-gray-900 rounded-full mx-auto"></div>
-          <p class="text-lg font-semibold mt-4">$34.99</p>
-        `, 'variant-black');
-        updateStatus('Added black variant');
-      };
-
-      window.addWhiteVariant = () => {
-        const carousel = document.querySelector('product-carousel');
-        carousel.addItem(`
-          <h3 class="text-xl font-semibold mb-2 text-gray-700">White Variant</h3>
-          <p class="text-sm text-gray-600 mb-4">Clean white color option</p>
-          <div class="w-16 h-16 bg-white border-2 border-gray-300 rounded-full mx-auto"></div>
-          <p class="text-lg font-semibold mt-4">$29.99</p>
-        `, 'variant-white');
-        updateStatus('Added white variant');
-      };
-
-      window.updateRedPrice = () => {
-        const carousel = document.querySelector('product-carousel');
-        carousel.updateSlide('variant-red', `
-          <h3 class="text-xl font-semibold mb-2 text-red-600">Red Variant</h3>
-          <p class="text-sm text-gray-600 mb-4">Classic red color option</p>
-          <div class="w-16 h-16 bg-red-500 rounded-full mx-auto"></div>
-          <p class="text-lg font-semibold mt-4"><span class="line-through text-gray-400">$29.99</span> $24.99</p>
-          <p class="text-sm text-green-600 font-semibold">Sale!</p>
+        carousel.updateSlide('image-1', `
+          <img
+            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
+            alt="Product front view"
+            class="w-full h-96 object-cover rounded-lg"
+          />
+          <p class="mt-3 text-center text-sm text-gray-600 font-semibold">Updated: Front view showing design details</p>
         `);
-        updateStatus('Updated red variant price');
-      };
-
-      window.updateBluePrice = () => {
-        const carousel = document.querySelector('product-carousel');
-        carousel.updateSlide('variant-blue', `
-          <h3 class="text-xl font-semibold mb-2 text-blue-600">Blue Variant</h3>
-          <p class="text-sm text-gray-600 mb-4">Ocean blue color option</p>
-          <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto"></div>
-          <p class="text-lg font-semibold mt-4">$29.99</p>
-          <p class="text-sm text-blue-600 font-semibold">Premium</p>
-        `);
-        updateStatus('Updated blue variant with premium label');
+        updateStatus('Updated image caption');
       };
 
       window.showCurrentSlide = () => {
@@ -257,6 +296,16 @@ carousel.removeSlide('variant-yellow');</code></pre>
         if (allIds.length > 0) {
           const lastId = allIds[allIds.length - 1];
           carousel.removeSlide(lastId);
+
+          // Remove corresponding thumbnail
+          const thumbs = document.querySelector('product-carousel-thumbs');
+          if (thumbs) {
+            const thumbToRemove = thumbs.querySelector(`[data-thumbnail-slide-id="${lastId}"]`);
+            if (thumbToRemove) {
+              thumbToRemove.remove();
+            }
+          }
+
           updateStatus(`Removed slide: ${lastId}`);
         } else {
           updateStatus('No slides to remove');
