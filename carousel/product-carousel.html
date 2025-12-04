@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Carousel Component</title>
+    <link rel="stylesheet" href="../assets/tailwind.build.css" />
+    <link rel="stylesheet" href="carousel.css" />
+  </head>
+  <body>
+    <header class="flex justify-between items-center p-4 border-b md:px-8">
+      <div>Product Carousel Component</div>
+      <div>🛍️</div>
+    </header>
+
+    <main class="p-4 md:px-8">
+      <article class="max-w-4xl mx-auto my-12 font-light prose">
+        <h1 class="mb-2 font-semibold">Product Carousel Component</h1>
+        <p class="mt-0 lead">An extended carousel component with programmatic control methods for dynamic content management.</p>
+        <ul>
+          <li>Extends base carousel with additional functionality</li>
+          <li>Scroll to specific slides by unique ID</li>
+          <li>Add new items dynamically</li>
+          <li>Update existing slide content</li>
+          <li>Remove slides programmatically</li>
+          <li>Get current slide and all slide IDs</li>
+          <li>Optional thumbnail navigation component</li>
+          <li>Perfect for product media galleries (images, 3D models, videos, etc.)</li>
+        </ul>
+      </article>
+
+      <!-- Product Carousel Demo -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Product Media Carousel</h2>
+
+        <product-carousel
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Product media carousel"
+          class="relative rounded-lg"
+          data-carousel-id="product-media"
+        >
+          <div
+            class="carousel__track"
+            data-carousel-track
+            id="product-carousel-track"
+          >
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-1">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
+                alt="Product front view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Front view showing design details</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-2">
+              <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop"
+                alt="Product side view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Side profile highlighting form</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-3">
+              <img
+                src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop"
+                alt="Product detail view"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Close-up detail shot</p>
+            </div>
+            <div class="carousel__slide w-full max-w-full" data-slide-id="image-4">
+              <img
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
+                alt="Product in use"
+                class="w-full h-96 object-cover rounded-lg"
+              />
+              <p class="mt-3 text-center text-sm text-gray-600">Product in context</p>
+            </div>
+          </div>
+
+          <div class="carousel__controls">
+            <button
+              class="carousel__button carousel__button--left"
+              data-carousel-direction="left"
+              aria-label="Previous image"
+              aria-controls="product-carousel-track"
+            >
+              ←
+            </button>
+            <button
+              class="carousel__button carousel__button--right"
+              data-carousel-direction="right"
+              aria-label="Next image"
+              aria-controls="product-carousel-track"
+            >
+              →
+            </button>
+          </div>
+        </product-carousel>
+
+        <!-- Thumbnail Navigation -->
+        <product-carousel-thumbs data-carousel-id="product-media">
+          <button data-thumbnail-slide-id="image-1" aria-label="View front view">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=64&h=64&fit=crop" alt="Front view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-2" aria-label="View side view">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=64&h=64&fit=crop" alt="Side view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-3" aria-label="View detail view">
+            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=64&h=64&fit=crop" alt="Detail view thumbnail" />
+          </button>
+          <button data-thumbnail-slide-id="image-4" aria-label="View product in use">
+            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=64&h=64&fit=crop" alt="Product in use thumbnail" />
+          </button>
+        </product-carousel-thumbs>
+      </section>
+
+      <!-- Control Panel -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Control Panel</h2>
+
+        <div class="bg-gray-100 rounded-lg p-6 space-y-4">
+          <!-- Scroll to specific image -->
+          <div>
+            <h3 class="font-semibold mb-2">Scroll to Image:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="scrollToImage('image-1')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 1</button>
+              <button onclick="scrollToImage('image-2')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 2</button>
+              <button onclick="scrollToImage('image-3')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 3</button>
+              <button onclick="scrollToImage('image-4')" class="px-4 py-2 bg-blue-500 text-white border border-blue-600 rounded hover:bg-blue-600 transition-colors">Image 4</button>
+            </div>
+          </div>
+
+          <!-- Add new image -->
+          <div>
+            <h3 class="font-semibold mb-2">Add New Image:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="addNewImage()" class="px-4 py-2 bg-green-500 text-white border border-green-600 rounded hover:bg-green-600 transition-colors">Add Image</button>
+            </div>
+          </div>
+
+          <!-- Update existing image -->
+          <div>
+            <h3 class="font-semibold mb-2">Update Image Caption:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="updateImageCaption()" class="px-4 py-2 bg-purple-100 text-purple-800 border border-purple-300 rounded hover:bg-purple-200 transition-colors">Update Caption</button>
+            </div>
+          </div>
+
+          <!-- Utility functions -->
+          <div>
+            <h3 class="font-semibold mb-2">Utility Functions:</h3>
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="showCurrentSlide()" class="px-4 py-2 bg-gray-500 text-white border border-gray-600 rounded hover:bg-gray-600 transition-colors">Show Current Slide</button>
+              <button onclick="showAllSlides()" class="px-4 py-2 bg-gray-500 text-white border border-gray-600 rounded hover:bg-gray-600 transition-colors">Show All Slide IDs</button>
+              <button onclick="removeLastSlide()" class="px-4 py-2 bg-red-600 text-white border border-red-700 rounded hover:bg-red-700 transition-colors">Remove Last Slide</button>
+            </div>
+          </div>
+
+          <!-- Status display -->
+          <div id="status" class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
+            Ready for interactions
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Examples -->
+      <section class="max-w-4xl mx-auto my-12">
+        <h2 class="text-2xl font-semibold mb-4">Usage Examples</h2>
+
+        <div class="bg-gray-100 rounded-lg p-4 space-y-4">
+          <div>
+            <h3 class="font-semibold mb-2">JavaScript API:</h3>
+            <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>// Get the carousel element
+const carousel = document.querySelector('product-carousel');
+
+// Scroll to a specific image
+carousel.scrollToSlide('image-1');
+
+// Add a new product image
+carousel.addItem('&lt;img src="image.jpg" alt="Product" /&gt;', 'image-5');
+
+// Update existing slide content
+carousel.updateSlide('image-1', '&lt;img src="new-image.jpg" alt="Updated" /&gt;');
+
+// Get current slide ID
+const currentId = carousel.getCurrentSlideId();
+
+// Get all slide IDs
+const allIds = carousel.getSlideIds();
+
+// Remove a slide
+carousel.removeSlide('variant-yellow');</code></pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Thumbnail Navigation:</h3>
+            <pre class="bg-gray-800 text-green-400 p-4 rounded text-sm overflow-x-auto"><code>&lt;product-carousel data-carousel-id="my-carousel"&gt;
+  &lt;div data-carousel-track&gt;
+    &lt;div data-slide-id="image-1"&gt;
+      &lt;img src="product-1.jpg" alt="Product view 1" /&gt;
+      &lt;p&gt;Caption for image 1&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div data-slide-id="image-2"&gt;
+      &lt;img src="product-2.jpg" alt="Product view 2" /&gt;
+      &lt;p&gt;Caption for image 2&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/product-carousel&gt;
+
+&lt;product-carousel-thumbs data-carousel-id="my-carousel"&gt;
+  &lt;button data-thumbnail-slide-id="image-1"&gt;
+    &lt;img src="thumb-1.jpg" alt="Thumbnail 1" /&gt;
+  &lt;/button&gt;
+  &lt;button data-thumbnail-slide-id="image-2"&gt;
+    &lt;img src="thumb-2.jpg" alt="Thumbnail 2" /&gt;
+  &lt;/button&gt;
+&lt;/product-carousel-thumbs&gt;</code></pre>
+            <p class="text-sm text-gray-600 mt-2">
+              Use <code class="bg-gray-200 px-1 rounded">data-carousel-id</code> on both components to link them together.
+              This is required and especially important when you have multiple carousels on the same page.
+              Clicking a thumbnail scrolls to the related slide, and the active thumbnail is highlighted automatically.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { ProductCarouselComponent } from './product-carousel.js';
+      import './product-carousel-thumbs.js';
+
+      // Make functions available globally for demo buttons
+      window.scrollToImage = (id) => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.scrollToSlide(id);
+        updateStatus(`Scrolled to ${id}`);
+      };
+
+      window.addNewImage = () => {
+        const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        const nextId = `image-${allIds.length + 1}`;
+
+        carousel.addItem(`
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+            alt="Product additional view"
+            class="w-full h-96 object-cover rounded-lg"
+          />
+          <p class="mt-3 text-center text-sm text-gray-600">Additional product view</p>
+        `, nextId);
+
+        // Add thumbnail for new image
+        const thumbs = document.querySelector('product-carousel-thumbs');
+        if (thumbs) {
+          const newThumb = document.createElement('button');
+          newThumb.setAttribute('data-thumbnail-slide-id', nextId);
+          newThumb.setAttribute('aria-label', 'View additional image');
+          newThumb.innerHTML = '<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=64&h=64&fit=crop" alt="Additional view thumbnail" />';
+          thumbs.appendChild(newThumb);
+        }
+
+        updateStatus(`Added new image: ${nextId}`);
+      };
+
+      window.updateImageCaption = () => {
+        const carousel = document.querySelector('product-carousel');
+        carousel.updateSlide('image-1', `
+          <img
+            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
+            alt="Product front view"
+            class="w-full h-96 object-cover rounded-lg"
+          />
+          <p class="mt-3 text-center text-sm text-gray-600 font-semibold">Updated: Front view showing design details</p>
+        `);
+        updateStatus('Updated image caption');
+      };
+
+      window.showCurrentSlide = () => {
+        const carousel = document.querySelector('product-carousel');
+        const currentId = carousel.getCurrentSlideId();
+        updateStatus(`Current slide ID: ${currentId || 'Unknown'}`);
+      };
+
+      window.showAllSlides = () => {
+        const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        updateStatus(`All slide IDs: ${allIds.join(', ')}`);
+      };
+
+      window.removeLastSlide = () => {
+        const carousel = document.querySelector('product-carousel');
+        const allIds = carousel.getSlideIds();
+        if (allIds.length > 0) {
+          const lastId = allIds[allIds.length - 1];
+          carousel.removeSlide(lastId);
+
+          // Remove corresponding thumbnail
+          const thumbs = document.querySelector('product-carousel-thumbs');
+          if (thumbs) {
+            const thumbToRemove = thumbs.querySelector(`[data-thumbnail-slide-id="${lastId}"]`);
+            if (thumbToRemove) {
+              thumbToRemove.remove();
+            }
+          }
+
+          updateStatus(`Removed slide: ${lastId}`);
+        } else {
+          updateStatus('No slides to remove');
+        }
+      };
+
+      function updateStatus(message) {
+        const statusEl = document.getElementById('status');
+        statusEl.textContent = message;
+        statusEl.className = 'mt-4 p-3 bg-green-50 border border-green-200 rounded text-sm';
+
+        setTimeout(() => {
+          statusEl.textContent = 'Ready for interactions';
+          statusEl.className = 'mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm';
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

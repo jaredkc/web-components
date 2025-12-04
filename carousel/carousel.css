@@ -1,0 +1,170 @@
+/*
+ * Carousel Component
+ *
+ * Base styles for a functional carousel using CSS scroll-snap.
+ */
+
+carousel-component,
+product-carousel {
+  --gap: 0;
+  --slide-max-width: 100%;
+  --slide-min-width: 300px;
+
+  display: block;
+  position: relative;
+}
+
+.carousel__controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.carousel__track {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--gap);
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.carousel__slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  /* Fixed width for consistent sizing, override as necessary */
+  max-width: var(--slide-max-width);
+  min-width: var(--slide-min-width);
+  width: 100%;
+}
+
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  font-size: 18px;
+  height: 44px;
+  justify-content: center;
+  pointer-events: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  user-select: none;
+  width: 44px;
+}
+
+.carousel__button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.carousel__button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.carousel__button:disabled {
+  opacity: 0;
+  cursor: not-allowed;
+}
+
+.carousel__button--left {
+  left: 16px;
+  transform: translateY(-50%) translateX(0);
+}
+
+.carousel__button--left:disabled {
+  transform: translateY(-50%) translateX(-60px);
+}
+
+.carousel__button--right {
+  right: 16px;
+  transform: translateY(-50%) translateX(0);
+}
+
+.carousel__button--right:disabled {
+  transform: translateY(-50%) translateX(60px);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .carousel__button {
+    transition: none;
+  }
+
+  .carousel__track {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+carousel-component:focus-within .carousel__button {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Product Carousel Thumbnails */
+product-carousel-thumbs {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id] {
+  background: transparent;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id]:hover {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id]:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id].carousel-thumb--active {
+  border-color: #3b82f6;
+  border-width: 3px;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+product-carousel-thumbs [data-thumbnail-slide-id] img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+/* Reduced motion support for thumbnails */
+@media (prefers-reduced-motion: reduce) {
+  product-carousel-thumbs [data-thumbnail-slide-id] {
+    transition: none;
+  }
+}
